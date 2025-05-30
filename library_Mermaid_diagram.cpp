@@ -86,6 +86,16 @@ classDiagram
         +void setReturnDate(string returnDate)
     }
 
+    class CsvDataManager {
+        +static bool saveBooksToCsv(const LibraryCatalog& catalog, const std::string& filePath)
+        +static bool loadBooksFromCsv(LibraryCatalog, const std::string& filePath)
+        +static bool saveMembersToCsv(const MemberManager& memberManager, const std::string& filePath)
+        +static bool loadMembersFromCsv(MemberManager& memberManager, const std::string& filePath)
+    }
+
+    CsvDataManager "1" o-- "*" Book : saves
+    CsvDataManager "1" o-- "*" Member : saves
+
     LibrarySystem "1" *-- "1" LibraryCatalog : manages
     LibrarySystem "1" *-- "1" MemberManager : manages
     LibrarySystem "1" *-- "1" LoanManager : manages
