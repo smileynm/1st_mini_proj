@@ -13,7 +13,7 @@ public:
 	~LibraryCatalog();
 	LibraryCatalog(const LibraryCatalog&) = delete;
 	LibraryCatalog& operator = (const LibraryCatalog&) = delete;
-	// ë³µì‚¬ ìƒì„±ì ë° ëŒ€ì… ì—°ì‚°ì ë°©ì§€
+	// º¹»ç »ı¼ºÀÚ ¹× ´ëÀÔ ¿¬»êÀÚ ¹æÁö
 
 	bool addBook(const string& title, const string& author, const string& isbn);
 	Book* findBookByISBN(const string& isbn) const;
@@ -21,7 +21,7 @@ public:
 	bool removeBook(const string& isbn);
 	void displayAllBooks() const;
 	vector<string> getAllISBNs() const;
-	
+
 private:
 	map<string, Book*> booksByISBN;
 	static string toLower(const string& str);

@@ -3,7 +3,7 @@
 /**************************** Member Class ****************************/
 
 // Constructor
-Member::Member(string memberId, string name, string contact) 
+Member::Member(string memberId, string name, string contact)
 	: m_memberId(memberId), m_name(name), m_contact(contact) {
 }
 
@@ -23,20 +23,20 @@ string Member::getContact() const {
 }
 
 // borrowedBooks getter
-// í˜„ì¬ ëŒ€ì—¬ì¤‘ì¸ ì±…ë“¤ì„ ë”°ë¡œ vectorë¡œ ê´€ë¦¬í•˜ì—¬ list-up
-const vector<Book*>& Member::getBorrowedbooks() const {
+// ÇöÀç ´ë¿©ÁßÀÎ Ã¥µéÀ» µû·Î vector·Î °ü¸®ÇÏ¿© list-up
+const vector<Book*>& Member::getBorrowedBooks() const {
 	return borrowedBooks;
 }
 
-// borrowBook í•¨ìˆ˜
+// borrowBook ÇÔ¼ö
 void Member::borrowBook(Book* book) {
-	borrowedBooks.push_back(book);	// ë¹Œë¦° ì±… vectorì˜ ë’¤ì— ë¹Œë¦¬ë ¤ëŠ” ì±… ì¶”ê°€
+	borrowedBooks.push_back(book);	// ºô¸° Ã¥ vectorÀÇ µÚ¿¡ ºô¸®·Á´Â Ã¥ Ãß°¡
 }
 
-// ë°˜ë‚© ì‹œí€€ìŠ¤
+// ¹İ³³ ½ÃÄö½º
 void Member::returnBook(Book* book) {
-	bool flag = 0; // ì˜ˆì™¸ì²˜ë¦¬ìš© í”Œë˜ê·¸
-	for (auto it = borrowedBooks.begin(); it != borrowedBooks.end(); ++it) { // beginë¶€í„° endê¹Œì§€ íƒìƒ‰
+	bool flag = 0; // ¿¹¿ÜÃ³¸®¿ë ÇÃ·¡±×
+	for (auto it = borrowedBooks.begin(); it != borrowedBooks.end(); ++it) { // beginºÎÅÍ end±îÁö Å½»ö
 		if (*it == book) {
 			borrowedBooks.erase(it);
 			flag = 1;
@@ -44,10 +44,10 @@ void Member::returnBook(Book* book) {
 		}
 	}
 	if (flag == 0)
-		printf("ëŒ€ì—¬ì¤‘ì¸ ì±…ì´ ì•„ë‹™ë‹ˆë‹¤\n");
+		printf("´ë¿©ÁßÀÎ Ã¥ÀÌ ¾Æ´Õ´Ï´Ù\n");
 }
 
-// ëŒ€ì—¬ì¤‘ì¸ì§€ í™•ì¸í•˜ëŠ” í•¨ìˆ˜
+// ´ë¿©ÁßÀÎÁö È®ÀÎÇÏ´Â ÇÔ¼ö
 bool Member::isBorrowing(const Book* book) const {
 	return book->getAvailability();
 }

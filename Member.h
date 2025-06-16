@@ -11,7 +11,7 @@ public:
 	string getMemberId() const;
 	string getName() const;
 	string getContact() const;
-	const vector<Book*>& getBorrowedbooks() const;
+	const vector<Book*>& getBorrowedBooks() const;
 	void borrowBook(Book* book);
 	void returnBook(Book* book);
 	bool isBorrowing(const Book* book) const;
@@ -22,4 +22,4 @@ private:
 	vector<Book*> borrowedBooks;
 };
 
-#endif
+#endif // __MEMBER_H__

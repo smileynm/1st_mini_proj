@@ -3,7 +3,7 @@
 /**************************** Loan Class ****************************/
 
 // Constructor
-// ë°˜ë‚© ë‚ ì§œëŠ” ë°˜ë‚© ì´ì „ì—ëŠ” ë¹„ì–´ìˆë‹¤.
+// ¹İ³³ ³¯Â¥´Â ¹İ³³ ÀÌÀü¿¡´Â ºñ¾îÀÖ´Ù.
 Loan::Loan(Member* member, Book* book, string borrowDate)
 	:m_member(member), m_book(book), m_borrowDate(borrowDate), m_returnDate("") {
 }
@@ -29,7 +29,7 @@ string Loan::getReturnDate() const {
 }
 
 // returnDate setter
-// ë°˜ë‚©ì´ ë°œìƒí–ˆì„ ê²½ìš° í˜„ì¬ ë‚ ì§œ ê¸°ë¡
+// ¹İ³³ÀÌ ¹ß»ıÇßÀ» °æ¿ì ÇöÀç ³¯Â¥ ±â·Ï
 void Loan::setReturnDate(const string& returnDate) {
 	this->m_returnDate = returnDate;
 }

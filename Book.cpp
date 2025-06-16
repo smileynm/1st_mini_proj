@@ -3,8 +3,8 @@
 /**************************** Book Class ****************************/
 
 // Constructor
-Book::Book(string title, string author, string isbn, int quantity)
-	: m_title(title), m_author(author), m_isbn(isbn), m_quantity(quantity) {
+Book::Book(string title, string author, string isbn)
+	: m_title(title), m_author(author), m_isbn(isbn) {
 	m_isAvailable = true;
 }
 
@@ -23,19 +23,14 @@ string Book::getISBN() const {
 	return m_isbn;
 }
 
-// quantity getter
-int Book::getQuantity() const {
-	return m_quantity;
-}
-
 // availability getter
-// ëŒ€ì—¬ ê°€ëŠ¥ ì—¬ë¶€
+// ´ë¿© °¡´É ¿©ºÎ
 bool Book::getAvailability() const {
 	return m_isAvailable;
 }
 
 // availability setter
-// ëŒ€ì¶œì‹œ 0, ë°˜ë‚©ì‹œ 1
+// ´ëÃâ½Ã 0, ¹Ý³³½Ã 1
 void Book::setAvailability(bool availability) {
 	m_isAvailable = availability;
 }
