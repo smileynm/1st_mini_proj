@@ -1,31 +1,31 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "LibrarySystem.h" // LibrarySystem Å¬·¡½º Á¤ÀÇ Æ÷ÇÔ
-#include "CsvDataManager.h" // µ¥ÀÌÅÍ ·Îµù/ÀúÀåÀ» À§ÇØ ÇÊ¿ä
+#include "LibrarySystem.h" // LibrarySystem í´ë˜ìŠ¤ ì •ì˜ í¬í•¨
+#include "CsvDataManager.h" // ë°ì´í„° ë¡œë”©/ì €ì¥ì„ ìœ„í•´ í•„ìš”
 
 int main() {
-    // µ¥ÀÌÅÍ ÆÄÀÏ °æ·Î Á¤ÀÇ (¿¹½Ã)
+    // ë°ì´í„° íŒŒì¼ ê²½ë¡œ ì •ì˜
     const std::string bookFilePath = "books.csv";
     const std::string memberFilePath = "members.csv";
 
-    // LibrarySystem °´Ã¼ »ı¼º
+    // LibrarySystem ê°ì²´ ìƒì„±
     LibrarySystem librarySystem;
 
-    // ÇÁ·Î±×·¥ ½ÃÀÛ ½Ã CSV ÆÄÀÏ¿¡¼­ µ¥ÀÌÅÍ ·Îµå
-    std::cout << "Loading data from CSV files..." << std::endl;
-    CsvDataManager::loadBooksFromCsv(librarySystem.getCatalog(), bookFilePath); // LibrarySystem¿¡ getCatalog() ¸Ş¼­µå ÇÊ¿ä °¡Á¤
-    CsvDataManager::loadMembersFromCsv(librarySystem.getMemberManager(), memberFilePath, librarySystem.getCatalog()); // LibrarySystem¿¡ getMemberManager() ¸Ş¼­µå ÇÊ¿ä °¡Á¤
+    // í”„ë¡œê·¸ë¨ ì‹œì‘ ì‹œ CSV íŒŒì¼ì—ì„œ ë°ì´í„° ë¡œë“œ
+    cout << "Loading data from CSV files..." << endl;
+    CsvDataManager::loadBooksFromCsv(librarySystem.getCatalog(), bookFilePath); 
+    CsvDataManager::loadMembersFromCsv(librarySystem.getMemberManager(),
+        memberFilePath, librarySystem.getCatalog()); 
     std::cout << "Data loading complete." << std::endl;
 
-
-    // LibrarySystemÀÇ ¸ŞÀÎ ½ÇÇà ·çÇÁ ½ÃÀÛ
+    // LibrarySystemì˜ ë©”ì¸ ì‹¤í–‰ ë£¨í”„ ì‹œì‘
     librarySystem.run();
 
-    // ÇÁ·Î±×·¥ Á¾·á ½Ã ÇöÀç µ¥ÀÌÅÍ¸¦ CSV ÆÄÀÏ¿¡ ÀúÀå
+    // í”„ë¡œê·¸ë¨ ì¢…ë£Œ ì‹œ í˜„ì¬ ë°ì´í„°ë¥¼ CSV íŒŒì¼ì— ì €ì¥
     std::cout << "Saving data to CSV files..." << std::endl;
-    CsvDataManager::saveBooksToCsv(librarySystem.getCatalog(), bookFilePath); // LibrarySystem¿¡ getCatalog() ¸Ş¼­µå ÇÊ¿ä °¡Á¤
-    CsvDataManager::saveMembersToCsv(librarySystem.getMemberManager(), memberFilePath); // LibrarySystem¿¡ getMemberManager() ¸Ş¼­µå ÇÊ¿ä °¡Á¤
+    CsvDataManager::saveBooksToCsv(librarySystem.getCatalog(), bookFilePath); // LibrarySystemì— getCatalog() ë©”ì„œë“œ í•„ìš” ê°€ì •
+    CsvDataManager::saveMembersToCsv(librarySystem.getMemberManager(), memberFilePath); // LibrarySystemì— getMemberManager() ë©”ì„œë“œ í•„ìš” ê°€ì •
     std::cout << "Data saving complete." << std::endl;
 
 
-    return 0; // ÇÁ·Î±×·¥ Á¤»ó Á¾·á
+    return 0; // í”„ë¡œê·¸ë¨ ì •ìƒ ì¢…ë£Œ
 }
