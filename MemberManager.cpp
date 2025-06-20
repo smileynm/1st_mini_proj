@@ -1,72 +1,72 @@
 #include "MemberManager.h"
 
-// »ı¼ºÀÚ ±¸Çö
+// ìƒì„±ì êµ¬í˜„
 MemberManager::MemberManager() {
     std::cout << "MemberManager created." << std::endl;
 }
 
-// ¼Ò¸êÀÚ ±¸Çö
+// ì†Œë©¸ì êµ¬í˜„
 MemberManager::~MemberManager() {
     std::cout << "MemberManager destroying..." << std::endl;
-    // ¸ÊÀ» ¼øÈ¸ÇÏ¸ç µ¿ÀûÀ¸·Î ÇÒ´çµÈ Member °´Ã¼µéÀ» delete ÇÕ´Ï´Ù.
+    // ë§µì„ ìˆœíšŒí•˜ë©° ë™ì ìœ¼ë¡œ í• ë‹¹ëœ Member ê°ì²´ë“¤ì„ delete
     for (auto it = membersById.begin(); it != membersById.end(); ++it) {
         string memberId = it->first;
         Member* member_ptr = it->second;
         std::cout << "Deleting member: " << member_ptr->getName() << " (" << memberId << ")" << std::endl;
-        delete member_ptr; // Member °´Ã¼ÀÇ ¸Ş¸ğ¸® ÇØÁ¦
+        delete member_ptr; // Member ê°ì²´ì˜ ë©”ëª¨ë¦¬ í•´ì œ
     }
-    membersById.clear(); // ¸Ê ºñ¿ì±â
+    membersById.clear(); // ë§µ ë¹„ìš°ê¸°
     std::cout << "MemberManager destroyed." << std::endl;
 }
 
-// È¸¿ø µî·Ï ¸Ş¼­µå ±¸Çö
+// íšŒì› ë“±ë¡ ë©”ì„œë“œ êµ¬í˜„
 bool MemberManager::registerMember(const std::string& memberId, const std::string& name, const std::string& contact) {
-    // ÀÌ¹Ì °°Àº IDÀÇ È¸¿øÀÌ ÀÖ´ÂÁö È®ÀÎ
+    // ì´ë¯¸ ê°™ì€ IDì˜ íšŒì›ì´ ìˆëŠ”ì§€ í™•ì¸
     if (membersById.count(memberId)) {
         std::cerr << "Error: Member with ID " << memberId << " already exists." << std::endl;
-        return false; // ÀÌ¹Ì Á¸ÀçÇÏ¸é µî·Ï ½ÇÆĞ
+        return false; // ì´ë¯¸ ì¡´ì¬í•˜ë©´ ë“±ë¡ ì‹¤íŒ¨
     }
 
-    // »õ·Î¿î Member °´Ã¼¸¦ µ¿ÀûÀ¸·Î »ı¼º
+    // ìƒˆë¡œìš´ Member ê°ì²´ë¥¼ ë™ì ìœ¼ë¡œ ìƒì„±
     Member* newMember = new Member(memberId, name, contact);
 
-    // ¸Ê¿¡ Ãß°¡
+    // ë§µì— ì¶”ê°€
     membersById[memberId] = newMember;
     std::cout << "Member registered: " << name << " (" << memberId << ")" << std::endl;
-    return true; // µî·Ï ¼º°ø
+    return true; // ë“±ë¡ ì„±ê³µ
 }
 
-// È¸¿ø ID·Î È¸¿ø °Ë»ö ¸Ş¼­µå ±¸Çö
+// íšŒì› IDë¡œ íšŒì› ê²€ìƒ‰ ë©”ì„œë“œ êµ¬í˜„
 Member* MemberManager::findMemberById(const std::string& memberId) const {
-    // ¸Ê¿¡¼­ ID·Î °Ë»ö
+    // ë§µì—ì„œ IDë¡œ ê²€ìƒ‰
     auto it = membersById.find(memberId);
     if (it != membersById.end()) {
-        // Ã£¾ÒÀ¸¸é ÇØ´ç Member* Æ÷ÀÎÅÍ ¹İÈ¯
+        // ì°¾ì•˜ìœ¼ë©´ í•´ë‹¹ Member* í¬ì¸í„° ë°˜í™˜
         return it->second;
     }
-    // ¸ø Ã£¾ÒÀ¸¸é nullptr ¹İÈ¯
+    // ëª» ì°¾ì•˜ìœ¼ë©´ nullptr ë°˜í™˜
     return nullptr;
 }
 
-// È¸¿ø Å»Åğ ¸Ş¼­µå ±¸Çö
+// íšŒì› íƒˆí‡´ ë©”ì„œë“œ êµ¬í˜„
 bool MemberManager::removeMember(const std::string& memberId) {
-    // ¸Ê¿¡¼­ ID·Î È¸¿ø Ã£±â
+    // ë§µì—ì„œ IDë¡œ íšŒì› ì°¾ê¸°
     auto it = membersById.find(memberId);
     if (it == membersById.end()) {
         std::cerr << "Error: Member with ID " << memberId << " not found for removal." << std::endl;
-        return false; // È¸¿øÀÌ ¾øÀ¸¸é Å»Åğ ½ÇÆĞ
+        return false; // íšŒì›ì´ ì—†ìœ¼ë©´ íƒˆí‡´ ì‹¤íŒ¨
     }
 
-    // Ã£Àº Member °´Ã¼ÀÇ ¸Ş¸ğ¸® ÇØÁ¦
+    // ì°¾ì€ Member ê°ì²´ì˜ ë©”ëª¨ë¦¬ í•´ì œ
     delete it->second;
 
-    // ¸Ê¿¡¼­ ÇØ´ç Ç×¸ñ Á¦°Å
+    // ë§µì—ì„œ í•´ë‹¹ í•­ëª© ì œê±°
     membersById.erase(it);
     std::cout << "Member removed: " << memberId << std::endl;
-    return true; // Å»Åğ ¼º°ø
+    return true; // íƒˆí‡´ ì„±ê³µ
 }
 
-// ¸ğµç È¸¿ø Á¤º¸ Ãâ·Â ¸Ş¼­µå ±¸Çö
+// ëª¨ë“  íšŒì› ì •ë³´ ì¶œë ¥ ë©”ì„œë“œ êµ¬í˜„
 void MemberManager::displayAllMembers() const {
     if (membersById.empty()) {
         std::cout << "There are no members registered." << std::endl;
@@ -74,7 +74,7 @@ void MemberManager::displayAllMembers() const {
     }
 
     std::cout << "\n--- Member List ---" << std::endl;
-    // ¸ÊÀº Å°(Member ID) ¼ø¼­·Î Á¤·ÄµÇ¾î ¼øÈ¸µË´Ï´Ù.
+    // ë§µì€ í‚¤(Member ID) ìˆœì„œë¡œ ì •ë ¬ë˜ì–´ ìˆœíšŒ
     for (auto it = membersById.begin(); it != membersById.end(); ++it) {
         string memberId = it->first;
         Member* member_ptr = it->second;
@@ -86,10 +86,10 @@ void MemberManager::displayAllMembers() const {
     std::cout << "------------------" << std::endl;
 }
 
-// ¸ğµç È¸¿ø ID ¸ñ·Ï ¹İÈ¯ ¸Ş¼­µå ±¸Çö
+// ëª¨ë“  íšŒì› ID ëª©ë¡ ë°˜í™˜ ë©”ì„œë“œ êµ¬í˜„
 std::vector<std::string> MemberManager::getAllMemberIds() const {
     std::vector<std::string> memberIds;
-    memberIds.reserve(membersById.size()); // ¹Ì¸® Å©±â¸¦ ¿¹¾àÇÏ¿© È¿À²¼º Çâ»ó
+    memberIds.reserve(membersById.size()); // ë¯¸ë¦¬ í¬ê¸°ë¥¼ ì˜ˆì•½í•˜ì—¬ íš¨ìœ¨ì„± í–¥ìƒ
 
     for (auto it = membersById.begin(); it != membersById.end(); ++it) {
         string memberId = it->first;
