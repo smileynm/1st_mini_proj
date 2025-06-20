@@ -10,7 +10,7 @@ LibraryCatalog::LibraryCatalog() {
 }
 
 // Destroyer
-// catalog°¡ ¼Ò¸êµÉ ¶§, ¸Ê¿¡ ÀúÀåµÈ ¸ğµç Book °´Ã¼ÀÇ ¸Ş¸ğ¸® ÇØÁ¦
+// catalogê°€ ì†Œë©¸ë  ë•Œ, ë§µì— ì €ì¥ëœ ëª¨ë“  Book ê°ì²´ì˜ ë©”ëª¨ë¦¬ í•´ì œ
 LibraryCatalog::~LibraryCatalog() {
 	cout << "LibraryCatalog destroying..." << endl;
 	for (auto it = booksByISBN.begin(); it != booksByISBN.end(); ++it) {
@@ -25,35 +25,35 @@ LibraryCatalog::~LibraryCatalog() {
 
 // 
 bool LibraryCatalog::addBook(const string& title, const string& author, const string& isbn) {
-	// ÀÌ¹Ì ÀÖ´Â Ã¥À» Ãß°¡ÇÏ·Á°í ÇÏ¸é false
+	// ì´ë¯¸ ìˆëŠ” ì±…ì„ ì¶”ê°€í•˜ë ¤ê³  í•˜ë©´ false
 	if (booksByISBN.count(isbn)) {
 		cerr << "Error: Book with ISBN" << isbn << " already exists." << endl;
 		return false;
 	}
 	
-	// »õ·Î¿î °´Ã¼¸¦ µ¿ÀûÀ¸·Î »ı¼º
+	// ìƒˆë¡œìš´ ê°ì²´ë¥¼ ë™ì ìœ¼ë¡œ ìƒì„±
 	Book* newBook = new Book(title, author, isbn);
-	// ¸Ê¿¡ »õ·Î¿î °´Ã¼ Ãß°¡
+	// ë§µì— ìƒˆë¡œìš´ ê°ì²´ ì¶”ê°€
 	booksByISBN[isbn] = newBook;
 	cout << "Book added: " << title << " (" << isbn << ")" << endl;
 	return true;
 }
 
-// ISBNÀ» È°¿ëÇÑ Ã¥ °Ë»ö ¸Ş¼­µå ±¸Çö
+// ISBNì„ í™œìš©í•œ ì±… ê²€ìƒ‰ ë©”ì„œë“œ êµ¬í˜„
 Book* LibraryCatalog::findBookByISBN(const string& isbn) const {
 	auto it = booksByISBN.find(isbn);
 	if (it != booksByISBN.end()) {
-		// Ã£Àº °æ¿ì Book* Æ÷ÀÎÅÍ ¹İÈ¯
+		// ì°¾ì€ ê²½ìš° Book* í¬ì¸í„° ë°˜í™˜
 		return it->second;
 	}
-	// ¸ø Ã£Àº °æ¿ì nullptr ¹İÈ¯
+	// ëª» ì°¾ì€ ê²½ìš° nullptr ë°˜í™˜
 	return nullptr;
 }
 
 vector<Book*> LibraryCatalog::searchBooks(const string& keyword) const {
 	vector<Book*> results;
-	if (keyword.empty()) { // Å°¿öµå°¡ ¾øÀ» °æ¿ì
-		// ¸ğµç Ã¥ ¹İÈ¯
+	if (keyword.empty()) { // í‚¤ì›Œë“œê°€ ì—†ì„ ê²½ìš°
+		// ëª¨ë“  ì±… ë°˜í™˜
 		for (auto it = booksByISBN.begin(); it != booksByISBN.end(); ++it) {
 			string isbn = it->first;
 			Book* book_ptr = it->second;
@@ -61,7 +61,7 @@ vector<Book*> LibraryCatalog::searchBooks(const string& keyword) const {
 		}
 		return results;
 	}
-	// °Ë»ö¾î¿Í ºñ±³ÇÒ ¹®ÀÚ¿­À» ¸ğµÎ ¼Ò¹®ÀÚ·Î º¯È¯ (ºñ±³ ¿ëÀÌ¼ºÀ» À§ÇØ)
+	// ê²€ìƒ‰ì–´ì™€ ë¹„êµí•  ë¬¸ìì—´ì„ ëª¨ë‘ ì†Œë¬¸ìë¡œ ë³€í™˜ (ë¹„êµ ìš©ì´ì„±ì„ ìœ„í•´)
 	string lowerKeyword = toLower(keyword);
 
 	for (auto it = booksByISBN.begin(); it != booksByISBN.end(); ++it) {
@@ -70,34 +70,34 @@ vector<Book*> LibraryCatalog::searchBooks(const string& keyword) const {
 		string lowerTitle = toLower(book_ptr->getTitle());
 		string lowerAuthor = toLower(book_ptr->getAuthor());
 
-		// Á¦¸ñ ¶Ç´Â ÀúÀÚ¿¡ Å°¿öµå ¹®ÀÚ¿­ÀÌ Æ÷ÇÔµÇ¾î ÀÖ´ÂÁö È®ÀÎ
+		// ì œëª© ë˜ëŠ” ì €ìì— í‚¤ì›Œë“œ ë¬¸ìì—´ì´ í¬í•¨ë˜ì–´ ìˆëŠ”ì§€ í™•ì¸
 		if (lowerTitle.find(lowerKeyword) != std::string::npos ||
 			lowerAuthor.find(lowerKeyword) != std::string::npos) {
-			results.push_back(book_ptr); // °á°ú ¸ñ·Ï¿¡ Ãß°¡
+			results.push_back(book_ptr); // ê²°ê³¼ ëª©ë¡ì— ì¶”ê°€
 		}
 	}
-	return results;	// °Ë»ö °á°ú vector ¹İÈ¯
+	return results;	// ê²€ìƒ‰ ê²°ê³¼ vector ë°˜í™˜
 }
 
-// Ã¥ Á¦°Å ¸Ş¼­µå ±¸Çö
+// ì±… ì œê±° ë©”ì„œë“œ êµ¬í˜„
 bool LibraryCatalog::removeBook(const std::string& isbn) {
-	// ¸Ê¿¡¼­ ISBNÀ¸·Î Ã¥ Ã£±â
+	// ë§µì—ì„œ ISBNìœ¼ë¡œ ì±… ì°¾ê¸°
 	auto it = booksByISBN.find(isbn);
 	if (it == booksByISBN.end()) {
 		std::cerr << "Error: Book with ISBN " << isbn << " not found for removal." << std::endl;
-		return false; // Ã¥ÀÌ ¾øÀ¸¸é Á¦°Å ½ÇÆĞ
+		return false; // ì±…ì´ ì—†ìœ¼ë©´ ì œê±° ì‹¤íŒ¨
 	}
 
-	// Ã£Àº Book °´Ã¼ÀÇ ¸Ş¸ğ¸® ÇØÁ¦
+	// ì°¾ì€ Book ê°ì²´ì˜ ë©”ëª¨ë¦¬ í•´ì œ
 	delete it->second;
 
-	// ¸Ê¿¡¼­ ÇØ´ç Ç×¸ñ Á¦°Å
+	// ë§µì—ì„œ í•´ë‹¹ í•­ëª© ì œê±°
 	booksByISBN.erase(it);
 	std::cout << "Book removed: " << isbn << std::endl;
-	return true; // Á¦°Å ¼º°ø
+	return true; // ì œê±° ì„±ê³µ
 }
 
-// ¸ğµç Ã¥ Á¤º¸ Ãâ·Â ¸Ş¼­µå ±¸Çö
+// ëª¨ë“  ì±… ì •ë³´ ì¶œë ¥ ë©”ì„œë“œ êµ¬í˜„
 void LibraryCatalog::displayAllBooks() const {
 	if (booksByISBN.empty()) {
 		std::cout << "The library catalog is empty." << std::endl;
@@ -105,7 +105,7 @@ void LibraryCatalog::displayAllBooks() const {
 	}
 
 	std::cout << "\n--- Library Catalog ---" << std::endl;
-	// ¸ÊÀº Å°(ISBN) ¼ø¼­·Î Á¤·ÄµÇ¾î ¼øÈ¸µË´Ï´Ù.
+	// ë§µì€ í‚¤(ISBN) ìˆœì„œë¡œ ì •ë ¬ë˜ì–´ ìˆœíšŒ
 	for (auto it = booksByISBN.begin(); it != booksByISBN.end(); ++it) {
 		string isbn = it->first;
 		Book* book_ptr = it->second;
@@ -118,10 +118,10 @@ void LibraryCatalog::displayAllBooks() const {
 	std::cout << "-----------------------" << std::endl;
 }
 
-// ¸ğµç ISBN ¸ñ·Ï ¹İÈ¯ ¸Ş¼­µå ±¸Çö
+// ëª¨ë“  ISBN ëª©ë¡ ë°˜í™˜ ë©”ì„œë“œ êµ¬í˜„
 std::vector<std::string> LibraryCatalog::getAllISBNs() const {
 	std::vector<std::string> isbns;
-	isbns.reserve(booksByISBN.size()); // ¹Ì¸® Å©±â¸¦ ¿¹¾àÇÏ¿© È¿À²¼º Çâ»ó
+	isbns.reserve(booksByISBN.size()); // ë¯¸ë¦¬ í¬ê¸°ë¥¼ ì˜ˆì•½í•˜ì—¬ íš¨ìœ¨ì„± í–¥ìƒ
 
 	for (auto it = booksByISBN.begin(); it != booksByISBN.end(); ++it) {
 		string isbn = it->first;
@@ -131,10 +131,10 @@ std::vector<std::string> LibraryCatalog::getAllISBNs() const {
 }
 
 
-// ¹®ÀÚ¿­ ¼Ò¹®ÀÚ º¯È¯ ÇïÆÛ ÇÔ¼ö ±¸Çö
+// ë¬¸ìì—´ ì†Œë¬¸ì ë³€í™˜ í—¬í¼ í•¨ìˆ˜ êµ¬í˜„
 std::string LibraryCatalog::toLower(const std::string& str) {
 	std::string lower_str = str;
 	std::transform(lower_str.begin(), lower_str.end(), lower_str.begin(),
-		[](unsigned char c) { return std::tolower(c); }); // °¢ ¹®ÀÚ¸¦ ¼Ò¹®ÀÚ·Î º¯È¯
+		[](unsigned char c) { return std::tolower(c); }); // ê° ë¬¸ìë¥¼ ì†Œë¬¸ìë¡œ ë³€í™˜
 	return lower_str;
 }
