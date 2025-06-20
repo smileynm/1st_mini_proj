@@ -37,12 +37,6 @@ void LibrarySystem::run() {
     while (choice != 11) { // 11번 메뉴가 종료라고 가정
         displayMenu();
         processUserInput();
-        // processUserInput 내부에서 choice 값을 업데이트하고 해당 handle 함수 호출
-        // 또는 run 함수 내에서 직접 사용자 입력을 받고 switch 문 등으로 분기
-        // 여기서는 processUserInput이 입력을 받고 적절한 handle 함수를 호출한다고 가정
-        // 실제 구현에서는 run 함수 내에서 입력 루프를 돌리는 것이 더 일반적
-
-        // 예시: run 함수 내에서 입력 루프를 돌리는 방식
         std::cout << "Enter your choice: ";
         if (std::cin >> choice) {
             // 입력 버퍼 비우기 (다음 getline 사용을 위해 필수)
@@ -58,7 +52,7 @@ void LibrarySystem::run() {
             case 7: handleDisplayAllMembers(); break;
             case 8: handleDisplayMemberLoans(); break;
             case 9: handleDisplayAllLoans(); break;
-            case 10: // 데이터 저장 기능 (선택 사항, 종료 시 자동 저장도 가능)
+            case 10: // 데이터 저장 기능 (종료 시 자동 저장 가능?)
                 CsvDataManager::saveBooksToCsv(catalog, "books.csv");
                 CsvDataManager::saveMembersToCsv(memberManager, "members.csv");
                 std::cout << "Data saved manually." << std::endl;
