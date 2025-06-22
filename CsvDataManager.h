@@ -3,26 +3,26 @@
 
 #include <string>
 #include <vector>
-#include "LibraryCatalog.h" // LibraryCatalog ë° Book í´ë˜ìŠ¤ ì„ ì–¸ í¬í•¨
-#include "MemberManager.h"  // MemberManager ë° Member í´ë˜ìŠ¤ ì„ ì–¸ í¬í•¨
+#include "LibraryCatalog.h" // LibraryCatalog ¹× Book Å¬·¡½º ¼±¾ğ Æ÷ÇÔ
+#include "MemberManager.h"  // MemberManager ¹× Member Å¬·¡½º ¼±¾ğ Æ÷ÇÔ
 
-// ìˆœìˆ˜ ì¡°ì‘(Pure Fabrication) íŒ¨í„´ì„ ì ìš©í•œ ë°ì´í„° ê´€ë¦¬ í´ë˜ìŠ¤
+// ¼ø¼ö Á¶ÀÛ(Pure Fabrication) ÆĞÅÏÀ» Àû¿ëÇÑ µ¥ÀÌÅÍ °ü¸® Å¬·¡½º
 class CsvDataManager {
 public:
-    // ì±… ë°ì´í„°ë¥¼ CSV íŒŒì¼ë¡œ ì €ì¥
+    // Ã¥ µ¥ÀÌÅÍ¸¦ CSV ÆÄÀÏ·Î ÀúÀå
     static bool saveBooksToCsv(const LibraryCatalog& catalog, const std::string& filePath);
 
-    // CSV íŒŒì¼ì—ì„œ ì±… ë°ì´í„°ë¥¼ ë¶ˆëŸ¬ì™€ ì¹´íƒˆë¡œê·¸ì— ì¶”ê°€
+    // CSV ÆÄÀÏ¿¡¼­ Ã¥ µ¥ÀÌÅÍ¸¦ ºÒ·¯¿Í Ä«Å»·Î±×¿¡ Ãß°¡
     static bool loadBooksFromCsv(LibraryCatalog& catalog, const std::string& filePath);
 
-    // íšŒì› ë°ì´í„°ë¥¼ CSV íŒŒì¼ë¡œ ì €ì¥
+    // È¸¿ø µ¥ÀÌÅÍ¸¦ CSV ÆÄÀÏ·Î ÀúÀå
     static bool saveMembersToCsv(const MemberManager& memberManager, const std::string& filePath);
 
-    // CSV íŒŒì¼ì—ì„œ íšŒì› ë°ì´í„°ë¥¼ ë¶ˆëŸ¬ì™€ íšŒì› ê´€ë¦¬ìì— ì¶”ê°€
+    // CSV ÆÄÀÏ¿¡¼­ È¸¿ø µ¥ÀÌÅÍ¸¦ ºÒ·¯¿Í È¸¿ø °ü¸®ÀÚ¿¡ Ãß°¡
     static bool loadMembersFromCsv(MemberManager& memberManager, const std::string& filePath, LibraryCatalog& catalog);
 
 private:
-    // CSV íŒŒì‹± ë° í¬ë§·íŒ… ê´€ë ¨ í—¬í¼ í•¨ìˆ˜
+    // CSV ÆÄ½Ì ¹× Æ÷¸ËÆÃ °ü·Ã ÇïÆÛ ÇÔ¼ö
     static std::string formatBookToCsvLine(const Book& book);
     static std::string formatMemberToCsvLine(const Member& member);
     static Book* parseBookFromCsvLine(const std::string& line);

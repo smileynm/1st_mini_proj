@@ -21,7 +21,7 @@ bool LoanManager::borrowBook(Member* member, Book* book) {
         std::cerr << "Error: Book \"" << book->getTitle() << "\" (ISBN: " << book->getISBN() << ") is not available." << std::endl;
         return false;
     }
-    if (member->isBorrowing(book)) {
+    if (member->isBorrowing(book)=='true') {
         std::cerr << "Error: Member \"" << member->getName() << "\" (ID: " << member->getMemberId()
             << ") is already borrowing book \"" << book->getTitle() << "\" (ISBN: " << book->getISBN() << ")." << std::endl;
         return false;

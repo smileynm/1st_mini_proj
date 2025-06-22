@@ -1,23 +1,23 @@
 #include "LibrarySystem.h"
-#include "CsvDataManager.h" // CsvDataManager ì‚¬ìš©ì„ ìœ„í•´ í¬í•¨
+#include "CsvDataManager.h" // CsvDataManager »ç¿ëÀ» À§ÇØ Æ÷ÇÔ
 #include <limits> // std::numeric_limits
 #include <ios>    // std::streamsize
 
-// ìƒì„±ì
+// »ı¼ºÀÚ
 LibrarySystem::LibrarySystem() {
     std::cout << "Library System initialized." << std::endl;
-    // ê´€ë¦¬ì ê°ì²´ë“¤ì€ ë©¤ë²„ ë³€ìˆ˜ë¡œ ì„ ì–¸ë˜ì—ˆìœ¼ë¯€ë¡œ LibrarySystem ê°ì²´ ìƒì„± ì‹œ ìë™ìœ¼ë¡œ ìƒì„±
-    // ì—¬ê¸°ì„œ ì´ˆê¸° ë°ì´í„° ë¡œë”©ì„ í•  ìˆ˜ë„ ìˆë‹¤. (mainì—ì„œ í•˜ê±°ë‚˜ ì—¬ê¸°ì„œ í•˜ê±°ë‚˜ ì„ íƒ ê°€ëŠ¥)
+    // °ü¸®ÀÚ °´Ã¼µéÀº ¸â¹ö º¯¼ö·Î ¼±¾ğµÇ¾úÀ¸¹Ç·Î LibrarySystem °´Ã¼ »ı¼º ½Ã ÀÚµ¿À¸·Î »ı¼º
+    // ¿©±â¼­ ÃÊ±â µ¥ÀÌÅÍ ·ÎµùÀ» ÇÒ ¼öµµ ÀÖ´Ù. (main¿¡¼­ ÇÏ°Å³ª ¿©±â¼­ ÇÏ°Å³ª ¼±ÅÃ °¡´É)
 }
 
-// ì†Œë©¸ì
+// ¼Ò¸êÀÚ
 LibrarySystem::~LibrarySystem() {
     std::cout << "Library System shutting down." << std::endl;
-    // ê´€ë¦¬ì ê°ì²´ë“¤ì€ LibrarySystem ê°ì²´ ì†Œë©¸ ì‹œ ìë™ìœ¼ë¡œ ì†Œë©¸.
-    // ì—¬ê¸°ì„œ ìµœì¢… ë°ì´í„° ì €ì¥ì„ í•  ìˆ˜ë„ ìˆìŒìŒ (mainì—ì„œ í•˜ê±°ë‚˜ ì—¬ê¸°ì„œ í•˜ê±°ë‚˜ ì„ íƒ ê°€ëŠ¥)
+    // °ü¸®ÀÚ °´Ã¼µéÀº LibrarySystem °´Ã¼ ¼Ò¸ê ½Ã ÀÚµ¿À¸·Î ¼Ò¸ê.
+    // ¿©±â¼­ ÃÖÁ¾ µ¥ÀÌÅÍ ÀúÀåÀ» ÇÒ ¼öµµ ÀÖÀ½À½ (main¿¡¼­ ÇÏ°Å³ª ¿©±â¼­ ÇÏ°Å³ª ¼±ÅÃ °¡´É)
 }
 
-// Getter ë©”ì„œë“œ êµ¬í˜„
+// Getter ¸Ş¼­µå ±¸Çö
 LibraryCatalog& LibrarySystem::getCatalog() {
     return catalog;
 }
@@ -31,15 +31,15 @@ LoanManager& LibrarySystem::getLoanManager() {
 }
 
 
-// ì‹œìŠ¤í…œ ë©”ì¸ ì‹¤í–‰ ë£¨í”„
+// ½Ã½ºÅÛ ¸ŞÀÎ ½ÇÇà ·çÇÁ
 void LibrarySystem::run() {
     int choice = 0;
-    while (choice != 11) { // 11ë²ˆ ë©”ë‰´ê°€ ì¢…ë£Œë¼ê³  ê°€ì •
+    while (choice != 11) { // 11¹ø ¸Ş´º°¡ Á¾·á¶ó°í °¡Á¤
         displayMenu();
         processUserInput();
         std::cout << "Enter your choice: ";
         if (std::cin >> choice) {
-            // ì…ë ¥ ë²„í¼ ë¹„ìš°ê¸° (ë‹¤ìŒ getline ì‚¬ìš©ì„ ìœ„í•´ í•„ìˆ˜)
+            // ÀÔ·Â ¹öÆÛ ºñ¿ì±â (´ÙÀ½ getline »ç¿ëÀ» À§ÇØ ÇÊ¼ö)
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
             switch (choice) {
@@ -52,25 +52,25 @@ void LibrarySystem::run() {
             case 7: handleDisplayAllMembers(); break;
             case 8: handleDisplayMemberLoans(); break;
             case 9: handleDisplayAllLoans(); break;
-            case 10: // ë°ì´í„° ì €ì¥ ê¸°ëŠ¥ (ì¢…ë£Œ ì‹œ ìë™ ì €ì¥ ê°€ëŠ¥?)
+            case 10: // µ¥ÀÌÅÍ ÀúÀå ±â´É (Á¾·á ½Ã ÀÚµ¿ ÀúÀå °¡´É?)
                 CsvDataManager::saveBooksToCsv(catalog, "books.csv");
                 CsvDataManager::saveMembersToCsv(memberManager, "members.csv");
                 std::cout << "Data saved manually." << std::endl;
                 break;
-            case 11: handleExit(); break; // ì¢…ë£Œ
+            case 11: handleExit(); break; // Á¾·á
             default: std::cout << "Invalid choice. Please try again." << std::endl; break;
             }
         }
         else {
-            // ì˜ëª»ëœ ì…ë ¥ ì²˜ë¦¬ (ìˆ«ìê°€ ì•„ë‹Œ ë¬¸ì ë“±)
+            // Àß¸øµÈ ÀÔ·Â Ã³¸® (¼ıÀÚ°¡ ¾Æ´Ñ ¹®ÀÚ µî)
             std::cerr << "Invalid input. Please enter a number." << std::endl;
-            std::cin.clear(); // ì˜¤ë¥˜ ìƒíƒœ í”Œë˜ê·¸ ì´ˆê¸°í™”
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ì…ë ¥ ë²„í¼ ë¹„ìš°ê¸°
+            std::cin.clear(); // ¿À·ù »óÅÂ ÇÃ·¡±× ÃÊ±âÈ­
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ÀÔ·Â ¹öÆÛ ºñ¿ì±â
         }
     }
 }
 
-// ë©”ë‰´ ì¶œë ¥
+// ¸Ş´º Ãâ·Â
 void LibrarySystem::displayMenu() {
     std::cout << "\n--- Library Management System Menu ---" << std::endl;
     std::cout << "1. Add Book" << std::endl;
@@ -82,13 +82,13 @@ void LibrarySystem::displayMenu() {
     std::cout << "7. Display All Members" << std::endl;
     std::cout << "8. Display Member Loans" << std::endl;
     std::cout << "9. Display All Loans" << std::endl;
-    std::cout << "10. Save Data (Manual)" << std::endl; // ìˆ˜ë™ ì €ì¥ ì˜µì…˜
+    std::cout << "10. Save Data (Manual)" << std::endl; // ¼öµ¿ ÀúÀå ¿É¼Ç
     std::cout << "11. Exit" << std::endl;
     std::cout << "--------------------------------------" << std::endl;
 }
 
 
-// ê° ê¸°ëŠ¥ í•¸ë“¤ëŸ¬ ë©”ì„œë“œ êµ¬í˜„ (ìŠ¤ì¼€ì¹˜)
+// °¢ ±â´É ÇÚµé·¯ ¸Ş¼­µå ±¸Çö (½ºÄÉÄ¡)
 void LibrarySystem::handleAddBook() {
     std::string title, author, isbn;
     std::cout << "Enter Book Title: ";
@@ -190,6 +190,9 @@ void LibrarySystem::handleDisplayAllLoans() {
 
 void LibrarySystem::handleExit() {
     std::cout << "Exiting Library Management System." << std::endl;
-    // run í•¨ìˆ˜ì˜ while ë£¨í”„ ì¡°ê±´(choice != 11)ì— ì˜í•´ ì¢…ë£Œ
-    // ì—¬ê¸°ì„œ ì¶”ê°€ì ì¸ ì •ë¦¬ ì‘ì—…ì´ í•„ìš”í•˜ë‹¤ë©´ ìˆ˜í–‰í•  ìˆ˜ ìˆë‹¤.
+    // run ÇÔ¼öÀÇ while ·çÇÁ Á¶°Ç(choice != 11)¿¡ ÀÇÇØ Á¾·á
+    // ¿©±â¼­ Ãß°¡ÀûÀÎ Á¤¸® ÀÛ¾÷ÀÌ ÇÊ¿äÇÏ´Ù¸é ¼öÇàÇÒ ¼ö ÀÖ´Ù.
+}
+
+void LibrarySystem::processUserInput() {
 }

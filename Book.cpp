@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Book.h"
 /**************************** Book Class ****************************/
 
@@ -24,13 +24,13 @@ string Book::getISBN() const {
 }
 
 // availability getter
-// ´ë¿© °¡´É ¿©ºÎ
+// ëŒ€ì—¬ ê°€ëŠ¥ ì—¬ë¶€
 bool Book::getAvailability() const {
 	return m_isAvailable;
 }
 
 // availability setter
-// ´ëÃâ½Ã 0, ¹Ý³³½Ã 1
+// ëŒ€ì¶œì‹œ 0, ë°˜ë‚©ì‹œ 1
 void Book::setAvailability(bool availability) {
 	m_isAvailable = availability;
 }

@@ -176,22 +176,22 @@ bool CsvDataManager::loadMembersFromCsv(MemberManager& memberManager, const std:
 
     std::string line;
     while (std::getline(inFile, line)) {
-        if (line.empty()) continue;
+        //if (line.empty()) continue;
 
         Member* member = parseMemberFromCsvLine(line, catalog);
-        if (member) {
-            if (!memberManager.findMemberById(member->getMemberId())) {
-                // 새 회원 추가 (직접 포인터 추가)
-                memberManager.addMemberPointer(member);
-            }
-            else {
-                std::cerr << "Warning: Member with ID " << member->getMemberId() << " already exists." << std::endl;
-                delete member; // 중복된 회원은 메모리 해제
-            }
-        }
-        else {
-            std::cerr << "Error: Failed to parse member data: " << line << std::endl;
-        }
+        //if (!line.empty()) {
+        //    if (!memberManager.findMemberById(member->getMemberId())) {
+        //        // 새 회원 추가 (직접 포인터 추가)
+        //        memberManager.addMemberPointer(member);
+        //    }
+        //    else {
+        //        std::cerr << "Warning: Member with ID " << member->getMemberId() << " already exists." << std::endl;
+        //        delete member; // 중복된 회원은 메모리 해제
+        //    }
+        //}
+        //else {
+        //    std::cerr << "Error: Failed to parse member data: " << line << std::endl;
+        //}
     }
 
     inFile.close();

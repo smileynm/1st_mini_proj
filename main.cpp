@@ -1,31 +1,31 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "LibrarySystem.h" // LibrarySystem í´ë˜ìŠ¤ ì •ì˜ í¬í•¨
-#include "CsvDataManager.h" // ë°ì´í„° ë¡œë”©/ì €ì¥ì„ ìœ„í•´ í•„ìš”
+#include "LibrarySystem.h" // LibrarySystem Å¬·¡½º Á¤ÀÇ Æ÷ÇÔ
+#include "CsvDataManager.h" // µ¥ÀÌÅÍ ·Îµù/ÀúÀåÀ» À§ÇØ ÇÊ¿ä
 
 int main() {
-    // ë°ì´í„° íŒŒì¼ ê²½ë¡œ ì •ì˜
+    // µ¥ÀÌÅÍ ÆÄÀÏ °æ·Î Á¤ÀÇ
     const std::string bookFilePath = "books.csv";
     const std::string memberFilePath = "members.csv";
 
-    // LibrarySystem ê°ì²´ ìƒì„±
+    // LibrarySystem °´Ã¼ »ı¼º
     LibrarySystem librarySystem;
 
-    // í”„ë¡œê·¸ë¨ ì‹œì‘ ì‹œ CSV íŒŒì¼ì—ì„œ ë°ì´í„° ë¡œë“œ
+    // ÇÁ·Î±×·¥ ½ÃÀÛ ½Ã CSV ÆÄÀÏ¿¡¼­ µ¥ÀÌÅÍ ·Îµå
     cout << "Loading data from CSV files..." << endl;
-    CsvDataManager::loadBooksFromCsv(librarySystem.getCatalog(), bookFilePath); 
+    CsvDataManager::loadBooksFromCsv(librarySystem.getCatalog(), bookFilePath);
     CsvDataManager::loadMembersFromCsv(librarySystem.getMemberManager(),
-        memberFilePath, librarySystem.getCatalog()); 
+        memberFilePath, librarySystem.getCatalog());
     std::cout << "Data loading complete." << std::endl;
 
-    // LibrarySystemì˜ ë©”ì¸ ì‹¤í–‰ ë£¨í”„ ì‹œì‘
+    // LibrarySystemÀÇ ¸ŞÀÎ ½ÇÇà ·çÇÁ ½ÃÀÛ
     librarySystem.run();
 
-    // í”„ë¡œê·¸ë¨ ì¢…ë£Œ ì‹œ í˜„ì¬ ë°ì´í„°ë¥¼ CSV íŒŒì¼ì— ì €ì¥
+    // ÇÁ·Î±×·¥ Á¾·á ½Ã ÇöÀç µ¥ÀÌÅÍ¸¦ CSV ÆÄÀÏ¿¡ ÀúÀå
     std::cout << "Saving data to CSV files..." << std::endl;
-    CsvDataManager::saveBooksToCsv(librarySystem.getCatalog(), bookFilePath); // LibrarySystemì— getCatalog() ë©”ì„œë“œ í•„ìš” ê°€ì •
-    CsvDataManager::saveMembersToCsv(librarySystem.getMemberManager(), memberFilePath); // LibrarySystemì— getMemberManager() ë©”ì„œë“œ í•„ìš” ê°€ì •
+    CsvDataManager::saveBooksToCsv(librarySystem.getCatalog(), bookFilePath); // LibrarySystem¿¡ getCatalog() ¸Ş¼­µå ÇÊ¿ä °¡Á¤
+    CsvDataManager::saveMembersToCsv(librarySystem.getMemberManager(), memberFilePath); // LibrarySystem¿¡ getMemberManager() ¸Ş¼­µå ÇÊ¿ä °¡Á¤
     std::cout << "Data saving complete." << std::endl;
 
 
-    return 0; // í”„ë¡œê·¸ë¨ ì •ìƒ ì¢…ë£Œ
+    return 0; // ÇÁ·Î±×·¥ Á¤»ó Á¾·á
 }
